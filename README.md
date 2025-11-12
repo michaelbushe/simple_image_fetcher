@@ -21,6 +21,7 @@ Try it out: [On the web](https://random-image-display.web.app/)
 - Adaptive to iOS and Android for looks and sizing.  Follows Material and HIG guidelines. No magic numbers.
 - Works on the web and mobile.
 - Deployed the web on PR merge with ci/cd pipelines
+- Web deploy uses WebAssembly for the best performance. (experimental)
 - Uses a Cupertino button on iOS since Material buttons look out of place on iOS.
 - Uses the latest and greatest Material 3 button on Android and non-iOS platforms.
 - Proper widget keys for fast rebuilds (and fast development)
