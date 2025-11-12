@@ -41,7 +41,8 @@ class AnotherImageButton extends StatelessWidget {
             : ButtonM3E(
                 key: const ValueKey('another_button_android'),
                 label: const Text(buttonText),
-                icon: const Icon(Icons.navigate_next),
+                //requirements just say "Another" not icon
+                // icon: const Icon(Icons.navigate_next),
                 size: ButtonM3ESize.md,
                 shape: ButtonM3EShape.round,
                 onPressed: isLoading ? null : () => imageState.fetchNextImage(),

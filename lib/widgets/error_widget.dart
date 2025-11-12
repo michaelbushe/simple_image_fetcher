@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../style/app_layout.dart';
+
 class ErrorDisplay extends StatelessWidget {
   const ErrorDisplay({super.key, required this.error});
 
@@ -15,22 +17,22 @@ class ErrorDisplay extends StatelessWidget {
         key: const ValueKey('error_container'),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.errorContainer,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppLayout.spacingMedium(context)),
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: AppLayout.contentPadding(context),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ExcludeSemantics(
                   child: Icon(
                     Icons.error_outline,
-                    size: 48,
+                    size: AppLayout.materialButtonHeight,
                     color: Theme.of(context).colorScheme.error,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: AppLayout.spacingMedium(context)),
                 Text(
                   error,
                   textAlign: TextAlign.center,

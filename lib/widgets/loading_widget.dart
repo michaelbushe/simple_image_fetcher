@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../style/app_layout.dart';
+
 class LoadingDisplay extends StatelessWidget {
   final String message;
 
@@ -18,7 +20,7 @@ class LoadingDisplay extends StatelessWidget {
           color: Theme.of(
             context,
           ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppLayout.spacingMedium(context)),
         ),
         child: Center(
           child: Column(
@@ -28,10 +30,10 @@ class LoadingDisplay extends StatelessWidget {
                 child: SpinKitWaveSpinner(
                   key: const ValueKey('wave_spinner'),
                   color: Theme.of(context).colorScheme.primary,
-                  size: 50.0,
+                  size: AppLayout.materialButtonHeight,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: AppLayout.spacingMedium(context)),
               Text(
                 message,
                 style: TextStyle(

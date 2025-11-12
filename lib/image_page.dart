@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:signals/signals_flutter.dart';
 
 import 'state/image_state.dart';
+import 'style/app_layout.dart';
 import 'widgets/image_display.dart';
 import 'widgets/another_image_button.dart';
 import 'widgets/settings_panel.dart';
@@ -151,10 +152,15 @@ class ImagePageState extends State<ImagePage>
               child: SafeArea(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    // Calculate available space for the image
-                    final buttonHeight = isLandscape ? 56.0 : 60.0;
-                    final verticalPadding = isLandscape ? 16.0 : 32.0;
-                    final horizontalPadding = isLandscape ? 48.0 : 32.0;
+                    final buttonHeight = AppLayout.buttonHeight(context);
+                    final verticalPadding = AppLayout.verticalPadding(
+                      context,
+                      isLandscape,
+                    );
+                    final horizontalPadding = AppLayout.horizontalPadding(
+                      context,
+                      isLandscape,
+                    );
 
                     final availableHeight =
                         constraints.maxHeight - buttonHeight - verticalPadding;
@@ -183,7 +189,6 @@ class ImagePageState extends State<ImagePage>
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Image container - ImageDisplay handles its own fade
                               Semantics(
                                 label: 'Image display area',
                                 child: SizedBox(
@@ -195,7 +200,11 @@ class ImagePageState extends State<ImagePage>
                                   ),
                                 ),
                               ),
-                              SizedBox(height: isLandscape ? 16 : 24),
+                              SizedBox(
+                                height: isLandscape
+                                    ? AppLayout.spacingMedium(context)
+                                    : AppLayout.spacingLarge(context),
+                              ),
                               // Button
                               const AnotherImageButton(
                                 key: ValueKey('another_button'),

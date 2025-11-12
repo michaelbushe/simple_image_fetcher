@@ -5,6 +5,18 @@ Video Links:
 [iOS](https://drive.google.com/file/d/1pj3sTtWlPtWwYSRYqsxD5dndbEcvRkNt/view?usp=sharing)
 [Android](https://drive.google.com/file/d/1dOisOV0YwbpQ-6ebePG4AsOOPfCwQsRn/view?usp=sharing)
 
+## Featues
+- Coordinated animations
+- Fast determination of background color from the picture. Trades off speed for fidelity - longer pixel sampling 
+  would result in better colors. 
+- Adapts to screen rotation
+- Semantics, including announcing image load and error on supported platforms
+- Launcher icon
+- Splash screen
+- Adaptive to iOS and Android for looks and sizing.  Follows Material and HIG guidelines. No magic numbers.
+
+Note: No icon on the button, no app title, etc. Does not go beyond the requirements, stays simple.
+
 ## Goal (provided from a third-party source)
 Build a tiny mobile app that fetches a random image from an API and displays it centered as a square. 
 A button should fetch a new image. 
