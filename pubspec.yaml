@@ -1,0 +1,28 @@
+name: random_image
+description: "An app that shows random images."
+publish_to: 'none'
+version: 0.3.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  button_m3e: ^0.1.1
+  cached_network_image: ^3.4.1
+  dio: ^5.9.0
+  flutter_spinkit: ^5.2.2
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+  signals: ^6.2.0
+  provider: ^6.1.5+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
