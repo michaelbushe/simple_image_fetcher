@@ -169,40 +169,38 @@ class ImagePageState extends State<ImagePage>
                           : constraints.maxHeight * 0.6,
                     );
 
-                    return SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight,
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: horizontalPadding / 2,
-                              vertical: verticalPadding / 2,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Image container - ImageDisplay handles its own fade
-                                Semantics(
-                                  label: 'Image display area',
-                                  child: SizedBox(
-                                    width: imageSize,
-                                    height: imageSize,
-                                    child: ImageDisplay(
-                                      key: const ValueKey('image_display'),
-                                      size: imageSize,
-                                    ),
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalPadding / 2,
+                            vertical: verticalPadding / 2,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Image container - ImageDisplay handles its own fade
+                              Semantics(
+                                label: 'Image display area',
+                                child: SizedBox(
+                                  width: imageSize,
+                                  height: imageSize,
+                                  child: ImageDisplay(
+                                    key: const ValueKey('image_display'),
+                                    size: imageSize,
                                   ),
                                 ),
-                                SizedBox(height: isLandscape ? 16 : 24),
-                                // Button
-                                const AnotherImageButton(
-                                  key: ValueKey('another_button'),
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(height: isLandscape ? 16 : 24),
+                              // Button
+                              const AnotherImageButton(
+                                key: ValueKey('another_button'),
+                              ),
+                            ],
                           ),
                         ),
                       ),
