@@ -9,13 +9,30 @@ Video Links:
 - Coordinated animations
 - Fast determination of background color from the picture. Trades off speed for fidelity - longer pixel sampling 
   would result in better colors. 
-- Adapts to screen rotation
+- Image clipped to a rounded square for a clean professional look.
+- Adapts to screen rotation and different sized screens.
 - Semantics, including announcing image load and error on supported platforms
+- Settings for dark/light theme (this was outside the spec but a convenience for theme switching.  Yes, it could be removed and use the system theme.)
+- Nifty wave spinner
 - Launcher icon
 - Splash screen
 - Adaptive to iOS and Android for looks and sizing.  Follows Material and HIG guidelines. No magic numbers.
-
-Note: No icon on the button, no app title, etc. Does not go beyond the requirements, stays simple.
+- Uses a Cupertino button on iOS since Material buttons look out of place on iOS.
+- Uses the latest and greatest Material 3 button on Android and non-iOS platforms.
+- Proper widget keys for fast rebuilds (and fast development)
+- Proper code structure
+  - Each drawn widget is a stateless widget, can be used independently
+  - The main page is only responsible for layout out the stateless widgets
+  - Service is separated from the widgets.
+  - Uses Signals for state management - a forward-looking choice. Signals is being built into the Dart SDK, it is
+    already the default for Angular.  I expect Signals to be the go-to choice, over Riverpod, BLoC,
+    etc. for Flutter state management
+  - Widgets only depend on the ImageState
+  
+Notes: 
+- There's no icon on the button, no app title, etc. Does not go beyond the requirements, stays simple.
+- Since the images are from a small set, the API should send the background color with the imageURL, calculating the 
+  colors at build or server start time.
 
 ## Goal (provided from a third-party source)
 Build a tiny mobile app that fetches a random image from an API and displays it centered as a square. 

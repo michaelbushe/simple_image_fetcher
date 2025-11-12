@@ -49,12 +49,7 @@ class ImageDisplay extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: currentImageUrl,
               fit: BoxFit.cover,
-              maxHeightDiskCache: 1000,
-              maxWidthDiskCache: 1000,
-              memCacheHeight: 1000,
-              memCacheWidth: 1000,
-              // Smooth fade when image actually loads from network/cache
-              fadeInDuration: const Duration(milliseconds: 400),
+              fadeInDuration: const Duration(milliseconds: 350),
               fadeOutDuration: const Duration(milliseconds: 200),
               errorWidget: (context, url, error) {
                 debugPrint('Image load error for $url: $error');
