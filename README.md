@@ -1,7 +1,10 @@
 # Image Fetcher
 A simple on-page image fetching app with polish.
 
+Try it out: [On the web](https://random-image-display.web.app/)
+
 [Video Link showing iOS, Android and Web](https://drive.google.com/file/d/1kLv1QmC7P5H4TUm2mArXQVDGbPyBYHCz/view?usp=sharing)
+
 
 ## Featues
 - Coordinated animations
@@ -16,7 +19,8 @@ A simple on-page image fetching app with polish.
 - Launcher icon
 - Splash screen
 - Adaptive to iOS and Android for looks and sizing.  Follows Material and HIG guidelines. No magic numbers.
-- Works on the web too.
+- Works on the web and mobile.
+- Deployed the web on PR merge with ci/cd pipelines
 - Uses a Cupertino button on iOS since Material buttons look out of place on iOS.
 - Uses the latest and greatest Material 3 button on Android and non-iOS platforms.
 - Proper widget keys for fast rebuilds (and fast development)
