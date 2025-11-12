@@ -1,14 +1,13 @@
 # Image Fetcher
 A simple on-page image fetching app with polish.
 
-Video Links:
-[iOS](https://drive.google.com/file/d/1pj3sTtWlPtWwYSRYqsxD5dndbEcvRkNt/view?usp=sharing)
-[Android](https://drive.google.com/file/d/1dOisOV0YwbpQ-6ebePG4AsOOPfCwQsRn/view?usp=sharing)
+[Video Link showing iOS, Android and Web](https://drive.google.com/file/d/1kLv1QmC7P5H4TUm2mArXQVDGbPyBYHCz/view?usp=sharing)
 
 ## Featues
 - Coordinated animations
 - Fast determination of background color from the picture. Trades off speed for fidelity - longer pixel sampling 
-  would result in better colors. 
+  would result in better colors. Samples in an X pattern to ensure 
+  all regions are captured (no white-on white for the shoe pic)
 - Image clipped to a rounded square for a clean professional look.
 - Adapts to screen rotation and different sized screens.
 - Semantics, including announcing image load and error on supported platforms
@@ -17,6 +16,7 @@ Video Links:
 - Launcher icon
 - Splash screen
 - Adaptive to iOS and Android for looks and sizing.  Follows Material and HIG guidelines. No magic numbers.
+- Works on the web too.
 - Uses a Cupertino button on iOS since Material buttons look out of place on iOS.
 - Uses the latest and greatest Material 3 button on Android and non-iOS platforms.
 - Proper widget keys for fast rebuilds (and fast development)

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:signals/signals_flutter.dart';
@@ -148,10 +148,10 @@ class ImageState {
     }
   }
 
-  /// Sample image pixels to make a themed background color
+  /// Sample image pixels in an X pattern to get representative colors
+  /// from all regions - center, edges, and corners
   Future<Color?> _extractColors(ui.Image image) async {
     try {
-      // Get pixel data from the image
       final ByteData? byteData = await image.toByteData(
         format: ui.ImageByteFormat.rawRgba,
       );
@@ -163,30 +163,40 @@ class ImageState {
 
       final int width = image.width;
       final int height = image.height;
-      final int samplesPerSide = 5;
 
       int totalRed = 0;
       int totalGreen = 0;
       int totalBlue = 0;
       int sampleCount = 0;
 
-      for (int row = 0; row < samplesPerSide; row++) {
-        for (int col = 0; col < samplesPerSide; col++) {
-          final int x = (col * width ~/ samplesPerSide).clamp(0, width - 1);
-          final int y = (row * height ~/ samplesPerSide).clamp(0, height - 1);
+      // Sample points along both diagonals (X pattern)
+      // This ensures we cover all regions: corners, edges, and center
+      final int samplesPerDiagonal = 10;
 
-          final int offset = (y * width + x) * 4;
+      // First diagonal: top-left to bottom-right
+      for (int i = 0; i < samplesPerDiagonal; i++) {
+        final double t = i / (samplesPerDiagonal - 1);
+        final int x = (t * width).toInt().clamp(0, width - 1);
+        final int y = (t * height).toInt().clamp(0, height - 1);
 
-          final int red = byteData.getUint8(offset);
-          final int green = byteData.getUint8(offset + 1);
-          final int blue = byteData.getUint8(offset + 2);
-          // Ignoring alpha at offset + 3
+        final int offset = (y * width + x) * 4;
+        totalRed += byteData.getUint8(offset);
+        totalGreen += byteData.getUint8(offset + 1);
+        totalBlue += byteData.getUint8(offset + 2);
+        sampleCount++;
+      }
 
-          totalRed += red;
-          totalGreen += green;
-          totalBlue += blue;
-          sampleCount++;
-        }
+      // Second diagonal: top-right to bottom-left
+      for (int i = 0; i < samplesPerDiagonal; i++) {
+        final double t = i / (samplesPerDiagonal - 1);
+        final int x = ((1.0 - t) * width).toInt().clamp(0, width - 1);
+        final int y = (t * height).toInt().clamp(0, height - 1);
+
+        final int offset = (y * width + x) * 4;
+        totalRed += byteData.getUint8(offset);
+        totalGreen += byteData.getUint8(offset + 1);
+        totalBlue += byteData.getUint8(offset + 2);
+        sampleCount++;
       }
 
       // Calculate average color
@@ -201,12 +211,12 @@ class ImageState {
         avgBlue,
       );
 
-      debugPrint('Sampled color: $extractedColor');
+      debugPrint('[COLOR] Sampled ${sampleCount} points in X pattern');
+      debugPrint('[COLOR] Extracted color: $extractedColor');
 
       return extractedColor;
     } catch (e) {
       debugPrint('[ERROR] Error extracting colors: $e');
-      // return null to use default color
       return null;
     }
   }
@@ -229,8 +239,12 @@ class ImageState {
 
   // whether to use Semantic announce to screen readers - deprecated on android
   // app uses MediaQuery to pass the value down to reduce checking.
-  bool _useSemanticAnnounce() =>
-      useSemanticAnnouncements && !Platform.isAndroid;
+  bool _useSemanticAnnounce() {
+    // Don't use on Android (deprecated) or web (not supported consistently)
+    if (kIsWeb) return false;
+    if (defaultTargetPlatform == TargetPlatform.android) return false;
+    return useSemanticAnnouncements;
+  }
 
   void _semanticAnnounce(String message) {
     if (_useSemanticAnnounce()) {

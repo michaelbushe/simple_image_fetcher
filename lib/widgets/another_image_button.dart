@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:button_m3e/button_m3e.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +17,7 @@ class AnotherImageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ImageState imageState = context.read<ImageState>();
+    final bool isIOSStyle = Theme.of(context).platform == TargetPlatform.iOS;
 
     return Watch((context) {
       final isLoading = imageState.isLoading.value;
@@ -32,7 +31,7 @@ class AnotherImageButton extends StatelessWidget {
         label: semanticLabel,
         hint: isLoading ? null : 'Double tap to fetch a new random image',
         excludeSemantics: true,
-        child: Platform.isIOS
+        child: isIOSStyle
             ? CupertinoButton.filled(
                 key: const ValueKey('another_button_ios'),
                 onPressed: isLoading ? null : () => imageState.fetchNextImage(),
